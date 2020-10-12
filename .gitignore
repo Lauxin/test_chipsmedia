@@ -1,0 +1,6 @@
+# local
+*.zip
+*.rar
+
+# generate
+result/

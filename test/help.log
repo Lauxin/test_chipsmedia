@@ -1,0 +1,506 @@
+ CNM_HEVC_ENC_SW_VERSION : 0.2.0.0
+ CNM_HEVC_ENC_ALGORITHM_VERSION : 2.0.4.0
+Usage: hevc_enc.exe [OPTION]
+
+  -c, --ConfigFile                      Defines configuration file to use.
+                                        Multiple configuration files may be used with repeated -c op
+                                        tions
+
+  -i, --InputFile                       Specifies the input video file.
+                                        Video data must be in a raw 4:2:0 planar format (Y0CbCr).
+                                        When the bit depth of samples is larger than 8, each sample 
+                                        should be 2 bytes(little endian, LSB-justified).
+
+  -p, --InputFileDir                    Specifies directory of the input video file
+                                        default value is ./
+
+  -w, --SourceWidth                     Specifies the width of the input video in luma samples.
+                                        min, max, default values are 0, 8192, 0
+
+  -h, --SourceHeight                    Specifies the height of the input video in luma samples.
+                                        min, max, default values are 0, 8192, 0
+
+      --EncMonochrome                   Enable monochrome encoding.
+                                        min, max, default values are 0, 1, 0
+
+      --InputBitDepth                   Specifies the bit depth of the input video.
+                                        min, max, default values are 8, 10, 8
+
+      --FrameRate                       Specifies the frame rate of the input video.
+                                        min, max, default values are 0.000000, 200.000000, 0.000000
+
+      --FrameSkip                       Specifies a number of frames to skip at beginning of input v
+                                        ideo file.
+                                        min, max, default values are 0, 2147483647, 0
+
+  -f, --FramesToBeEncoded               Specifies the number of frames to be encoded.
+                                        A value of -1 implies an all frames.
+                                        min, max, default values are -1, 2147483647, -1
+
+  -b, --BitstreamFile                   Specifies the output coded bit stream file.
+
+  -o, --ReconFile                       Specifies the output locally reconstructed video file.
+                                        Not generate reconstructed video file by default.
+
+      --InternalBitDepth                Specifies the bit depth used for coding. Note: InternalBitDe
+                                        pth should be the same as InputBitDepth.
+                                        min, max, default values are 0, 10, 0
+
+      --IntraPeriod                     Specifies the intra frame period.
+                                        A value of '0' implies an infinite period.
+                                        min, max, default values are 0, 65535, 0
+
+      --DecodingRefreshType             Specifies the type of decoding refresh to apply at the intra
+                                         frame period.
+                                        0 Applies an I picture (not a clean random access point).
+                                        1 Applies a non-IDR clean random access (CRA) point.
+                                        2 Applies an IDR random access point.
+                                        min, max, default values are 0, 2, 1
+
+      --GOPSize                         Specifies the size of the cyclic GOP structure.
+                                        min, max, default values are 1, 8, 1
+
+      --Frame1                          slice_type POC QP_offset lambda_weight(not used) temporal_id
+                                         ref_L0 (ref_L1)
+
+      --Frame2                          slice_type POC QP_offset lambda_weight(not used) temporal_id
+                                         ref_L0 (ref_L1)
+
+      --Frame3                          slice_type POC QP_offset lambda_weight(not used) temporal_id
+                                         ref_L0 (ref_L1)
+
+      --Frame4                          slice_type POC QP_offset lambda_weight(not used) temporal_id
+                                         ref_L0 (ref_L1)
+
+      --Frame5                          slice_type POC QP_offset lambda_weight(not used) temporal_id
+                                         ref_L0 (ref_L1)
+
+      --Frame6                          slice_type POC QP_offset lambda_weight(not used) temporal_id
+                                         ref_L0 (ref_L1)
+
+      --Frame7                          slice_type POC QP_offset lambda_weight(not used) temporal_id
+                                         ref_L0 (ref_L1)
+
+      --Frame8                          slice_type POC QP_offset lambda_weight(not used) temporal_id
+                                         ref_L0 (ref_L1)
+
+      --UseAsLongTermRefPeriod          Specifies the period of pictures used as long-term reference
+                                        .
+                                        min, max, default values are 0, 2147483647, 0
+
+      --RefLongTermPeriod               Specifies the period of pictures referencing long-term refer
+                                        ence
+                                        min, max, default values are 0, 2147483647, 0
+
+      --IndeSliceMode                   Control the slice partitioning method in conjunction with Sl
+                                        iceArg
+                                          0 Single slice
+                                          1 Number of CTUs per slice
+                                        min, max, default values are 0, 1, 0
+
+      --IndeSliceArg                    Specify the maximum number of CTUs in a slice depending on S
+                                        liceMode
+                                        min, max, default values are 0, 65535, 0
+
+      --DeSliceMode                     Control the slice segment partitioning method in conjunction
+                                         with SliceSegArg
+                                          0 Single slice segment
+                                          1 Number of CTUs per slice segment
+                                          2 Number of bytes per slice segment
+                                        min, max, default values are 0, 2, 0
+
+      --DeSliceArg                      Specify the maximum number of CTUs or bytes in a slice segme
+                                        nt depending on SliceSegMode
+                                        min, max, default values are 0, 65535, 0
+
+      --IntraNxN                        Enable an intra NxN
+                                        min, max, default values are 0, 1, 1
+
+      --StrongIntraSmoothing            Enable a strong intra smoothing
+                                        min, max, default values are 0, 1, 1
+
+      --IntraTransSkip                  Enable an intra transform skip
+                                          0 Disable the intra transform skip
+                                          1 Enable the intra transform skip for chroma of CU_8x8 and
+                                         luma & chroma of IntraNxN
+                                          2 Enable the intra transform skip for luma & chroma of Int
+                                        raNxN
+                                        min, max, default values are 0, 2, 1
+
+      --ConstrainedIntraPred            Enables constrained intra prediction.
+                                        min, max, default values are 0, 1, 0
+
+      --IntraCtuRefreshMode             Specify intra CTU refresh mode.
+                                        0 Not intra refresh
+                                        1 Row
+                                        2 Column
+                                        3 A step size in CTU
+                                        4 Adaptive Intra Refresh (AIR).
+                                        min, max, default values are 0, 4, 0
+
+      --IntraCtuRefreshArg              Depending on IntraCtuRefreshMode being:
+                                        The number of consecutive CTU rows for intra refresh mode of
+                                         1
+                                        The number of consecutive CTU columns for intra refresh mode
+                                         of 2
+                                        A step size in CTU for intra refresh mode of 3
+                                        min, max, default values are 0, 65535, 0
+
+      --MaxNumMerge                     Specifies the maximum number of merge candidates.
+                                        min, max, default values are 1, 2, 2
+
+      --EnTemporalMVP                   Enables temporal MVP.
+                                        min, max, default values are 0, 1, 1
+
+      --DisableCoefClear                Disables the transform coefficient clearing algorithm in P o
+                                        r B picture.
+                                         0 : All-zero coefficient block is evaluated additionally in
+                                         RDO
+                                         1 : All-zero coefficient block is not evaluated in RDO
+                                        min, max, default values are 0, 1, 0
+
+  -q, --QP                              Specifies the base value of the quantization parameter.
+                                        min, max, default values are 0, 51, 30
+
+      --CbQpOffset                      Specifies the QP offset value for Chroma CB component.
+                                        min, max, default values are -12, 12, 0
+
+      --CrQpOffset                      Specifies the QP offset value for Chroma CR component.
+                                        min, max, default values are -12, 12, 0
+
+      --ScalingList                     Enables a user scaling list.
+                                        min, max, default values are 0, 1, 0
+
+  -L, --ScalingListFile                 Specifies the file name to be loaded for user scaling list.
+                                        default value is default_scaling_list.txt
+
+      --EnDBK                           Enables in-loop deblocking filter.
+                                        min, max, default values are 0, 1, 1
+
+      --EnSAO                           Enables sample adaptive offset.
+                                        min, max, default values are 0, 1, 1
+
+      --LFCrossSliceBoundaryFlag        Enables the use of in-loop filtering across slice boundaries
+                                        .
+                                        min, max, default values are 0, 1, 1
+
+      --BetaOffsetDiv2                  Specifies BetaOffsetDiv2 for deblocking filter.
+                                        min, max, default values are -6, 6, 0
+
+      --TcOffsetDiv2                    Specifies TcOffsetDiv2 for deblocking filter.
+                                        min, max, default values are -6, 6, 0
+
+  -R, --RateControl                     Enables rate control
+                                        min, max, default values are 0, 1, 0
+
+  -D, --InitialDelay                    Initial cpb delay, in msec
+                                        min, max, default values are 10, 3000, 3000
+
+  -C, --CULevelRateControl              Enables CU-level rate control.
+                                        min, max, default values are 0, 1, 1
+
+      --BitAllocMode                    Specifies the allocation mode for target bits of pictures.
+                                        Only available when RateControl is 1 and GOP size is larger 
+                                        than 1.
+                                        0 : More referenced pictures have better quality than less r
+                                        eferenced pictures
+                                        1 : Each picture bits in a GOP is allocated according to Fix
+                                        edRationN
+                                        min, max, default values are 0, 1, 0
+
+      --EnHvsQp                         Enable CU QP derivation from variance. Only available when C
+                                        ULevelRateControl is 1.
+                                        min, max, default values are 0, 1, 1
+
+      --HvsQpScaleDiv2                  Specifies the scale for CU QP derivation. Only available whe
+                                        n EnHvsQp is 1.
+                                        min, max, default values are 0, 4, 2
+
+  -E, --EncBitrate                      Specifies the target bitrate, in bps
+                                        min, max, default values are 0, 700000000, 0
+
+      --RcInitialQp                     Specifies the initial QP by user. (only valid when rate cont
+                                        rol is enabled.) (-1 : The initial QP is automatically deriv
+                                        ed)
+                                        min, max, default values are -1, 51, -1
+
+      --FixedBitRatio0                  Specifies the bits ratio of each pictures. (only valid when 
+                                        BitAllocMode is 1.)
+                                        min, max, default values are 1, 255, 1
+
+      --FixedBitRatio1                  Specifies the bits ratio of each pictures. (only valid when 
+                                        BitAllocMode is 1.)
+                                        min, max, default values are 1, 255, 1
+
+      --FixedBitRatio2                  Specifies the bits ratio of each pictures. (only valid when 
+                                        BitAllocMode is 1.)
+                                        min, max, default values are 1, 255, 1
+
+      --FixedBitRatio3                  Specifies the bits ratio of each pictures. (only valid when 
+                                        BitAllocMode is 1.)
+                                        min, max, default values are 1, 255, 1
+
+      --FixedBitRatio4                  Specifies the bits ratio of each pictures. (only valid when 
+                                        BitAllocMode is 1.)
+                                        min, max, default values are 1, 255, 1
+
+      --FixedBitRatio5                  Specifies the bits ratio of each pictures. (only valid when 
+                                        BitAllocMode is 1.)
+                                        min, max, default values are 1, 255, 1
+
+      --FixedBitRatio6                  Specifies the bits ratio of each pictures. (only valid when 
+                                        BitAllocMode is 1.)
+                                        min, max, default values are 1, 255, 1
+
+      --FixedBitRatio7                  Specifies the bits ratio of each pictures. (only valid when 
+                                        BitAllocMode is 1.)
+                                        min, max, default values are 1, 255, 1
+
+      --MinQp                           Specifies minimum QP. (only valid when RateControl is 1.)
+                                        min, max, default values are 0, 51, 8
+
+      --MaxQp                           Specifies maximum QP. (only valid  when RateControl is 1.)
+                                        min, max, default values are 0, 51, 51
+
+      --MaxDeltaQp                      Specifies maximum delta QP from CTU QP. (only valid when CUL
+                                        evelRateControl is 1.)
+                                        min, max, default values are 0, 12, 10
+
+      --EnRoi                           Enables ROI.
+                                        min, max, default values are 0, 1, 0
+
+      --RoiFile                         Specifies the ROI file name to be loaded.
+
+      --RoiAvgQP                        Specifies the average QP of all QPs in a picture.
+                                        min, max, default values are 0, 51, 0
+
+      --WaveFrontSynchro                Enables the use of specific CABAC probabilities synchronizat
+                                        ion at the beginning of each line of CTBs in order to produc
+                                        e a bitstream that can be decoded using one or more cores.
+                                        min, max, default values are 0, 1, 0
+
+      --LosslessCoding                  Enables lossless coding.
+                                        min, max, default values are 0, 1, 0
+
+      --ConfWindSizeTop                 Specifies a crop size of top in pixel. (should be multiples 
+                                        of 2 for 4:2:0 format)
+                                        min, max, default values are 0, 8192, 0
+
+      --ConfWindSizeBot                 Specifies a crop size of bottom in pixel. (should be multipl
+                                        es of 2 for 4:2:0 format)
+                                        min, max, default values are 0, 8192, 0
+
+      --ConfWindSizeRight               Specifies a crop size of right in pixel. (should be multiple
+                                        s of 2 for 4:2:0 format)
+                                        min, max, default values are 0, 8192, 0
+
+      --ConfWindSizeLeft                Specifies a crop size of left in pixel. (should be multiples
+                                         of 2 for 4:2:0 format)
+                                        min, max, default values are 0, 8192, 0
+
+      --GopPreset                       Specifies the preset of GOP
+                                        1 : I-I-I-I,..I (all intra, gop_size=1)
+                                        2 : I-P-P-P,.. P (consecutive P, gop_size=1)
+                                        3 : I-B-B-B,.. B (consecutive B, gop_size=1)
+                                        4 : I-B-P-B-P,  (gop_size=2)
+                                        5 : I-B-B-B-P,  (gop_size=4)
+                                        6 : I-P-P-P-P, (consecutive P, gop_size=4)
+                                        7 : I-B-B-B-B, (consecutive B, gop_size=4)
+                                        8 : I-B-B-B-B-B-B-B-B, (Hierarchical B, gop_size=8)
+                                        min, max, default values are 0, 8, 0
+
+      --WeightedPred                    Enable weighted prediction
+                                         0 : Disables Weighted prediction
+                                         1 : Enables Weighted prediction with the parameters derived
+                                         from YUV sequence.
+                                        min, max, default values are 0, 3, 0
+
+      --EnNoiseReductionY               Enable noise reduction algorithm for Y component.
+                                        min, max, default values are 0, 1, 0
+
+      --EnNoiseReductionCb              Enable noise reduction algorithm for Cb component.
+                                        min, max, default values are 0, 1, 0
+
+      --EnNoiseReductionCr              Enable noise reduction algorithm for Cr component.
+                                        min, max, default values are 0, 1, 0
+
+      --EnNoiseEst                      Enable noise sigma estimation algorithm.
+                                        min, max, default values are 0, 1, 0
+
+      --NoiseSigmaY                     Specifies the Y  noise standard deviation by user when EnNoi
+                                        seEst is disabled.
+                                        min, max, default values are 0, 255, 0
+
+      --NoiseSigmaCb                    Specifies the Cb noise standard deviation by user when EnNoi
+                                        seEst is disabled.
+                                        min, max, default values are 0, 255, 0
+
+      --NoiseSigmaCr                    Specifies the Cr noise standard deviation by user when EnNoi
+                                        seEst is disabled.
+                                        min, max, default values are 0, 255, 0
+
+      --IntraNoiseWeightY               Specifies the weight to Y  noise level for intra picture (on
+                                        ly valid if EnNoiseReductionY is enabled.)
+                                        min, max, default values are 0, 31, 7
+
+      --IntraNoiseWeightCb              Specifies the weight to Cb noise level for intra picture (on
+                                        ly valid if EnNoiseReductionCb is enabled.)
+                                        min, max, default values are 0, 31, 7
+
+      --IntraNoiseWeightCr              Specifies the weight to Cr noise level for intra picture (on
+                                        ly valid if EnNoiseReductionCr is enabled.)
+                                        min, max, default values are 0, 31, 7
+
+      --InterNoiseWeightY               Specifies the weight to Y  noise level for inter picture (on
+                                        ly valid if EnNoiseReductionY is enabled.)
+                                        min, max, default values are 0, 31, 4
+
+      --InterNoiseWeightCb              Specifies the weight to Cb noise level for inter picture (on
+                                        ly valid if EnNoiseReductionCb is enabled.)
+                                        min, max, default values are 0, 31, 4
+
+      --InterNoiseWeightCr              Specifies the weight to Cr noise level for inter picture (on
+                                        ly valid if EnNoiseReductionCr is enabled.)
+                                        min, max, default values are 0, 31, 4
+
+      --EnBgDetect                      Enable background detection
+                                        min, max, default values are 0, 1, 0
+
+      --BgThDiff                        Specifies the threshold for max difference in s2mv (0,0) blo
+                                        ck when background detection is on
+                                        min, max, default values are 0, 255, 8
+
+      --BgThMeanDiff                    Specifies the threshold for mean of s2me block when backgrou
+                                        nd detection is on
+                                        min, max, default values are 0, 255, 1
+
+      --BgLambdaQp                      Specifies the minimum value for Lambda QP value to be used i
+                                        n the background area.
+                                        min, max, default values are 0, 51, 32
+
+      --BgDeltaQp                       Specifies the difference the Lambda QP value of the backgrou
+                                        nd and that of the foreground.
+                                        min, max, default values are -16, 15, 3
+
+      --TileNumColumns                  Specifies the number of tile columns in a picture.
+                                        min, max, default values are 1, 8, 1
+
+      --TileNumRows                     Specifies the number of tile rows in a picture.
+                                        min, max, default values are 1, 8, 1
+
+      --EnLambdaMap                     Enables Lambda Map to set lambda values for each 32x32 block
+                                         by user.
+                                        min, max, default values are 0, 1, 0
+
+      --LambdaMapFile                   Specifies the Lambda Map file name to be loaded.
+
+      --EnCustomLambda                  Enables custom lambda to set lambda values for  a picture by
+                                         user.
+                                        min, max, default values are 0, 1, 0
+
+      --CustomLambdaFile                Specifies the custom lambda file name to be loaded.
+
+      --EnCustomMD                      Enables custom mode decision using delta rates for RD cost c
+                                        alculation
+                                        min, max, default values are 0, 1, 0
+
+      --PU04DeltaRate                   Specifies the delta rate for RD cost of PU04
+                                        min, max, default values are 0, 255, 0
+
+      --PU08DeltaRate                   Specifies the delta rate for RD cost of PU08
+                                        min, max, default values are 0, 255, 0
+
+      --PU16DeltaRate                   Specifies the delta rate for RD cost of PU16
+                                        min, max, default values are 0, 255, 0
+
+      --PU32DeltaRate                   Specifies the delta rate for RD cost of PU32
+                                        min, max, default values are 0, 255, 0
+
+      --PU04IntraPlanarDeltaRate        Specifies the delta rate for RD cost of Intra Planar mode of
+                                         PU04
+                                        min, max, default values are 0, 255, 0
+
+      --PU04IntraDcDeltaRate            Specifies the delta rate for RD cost of Intra DC mode of PU0
+                                        4
+                                        min, max, default values are 0, 255, 0
+
+      --PU04IntraAngleDeltaRate         Specifies the delta rate for RD cost of Intra angle modes of
+                                         PU04
+                                        min, max, default values are 0, 255, 0
+
+      --PU08IntraPlanarDeltaRate        Specifies the delta rate for RD cost of Intra Planar mode of
+                                         PU08
+                                        min, max, default values are 0, 255, 0
+
+      --PU08IntraDcDeltaRate            Specifies the delta rate for RD cost of Intra DC mode of PU0
+                                        8
+                                        min, max, default values are 0, 255, 0
+
+      --PU08IntraAngleDeltaRate         Specifies the delta rate for RD cost of Intra angle modes of
+                                         PU08
+                                        min, max, default values are 0, 255, 0
+
+      --PU16IntraPlanarDeltaRate        Specifies the delta rate for RD cost of Intra Planar mode of
+                                         PU16
+                                        min, max, default values are 0, 255, 0
+
+      --PU16IntraDcDeltaRate            Specifies the delta rate for RD cost of Intra DC mode of PU1
+                                        6
+                                        min, max, default values are 0, 255, 0
+
+      --PU16IntraAngleDeltaRate         Specifies the delta rate for RD cost of Intra angle modes of
+                                         PU16
+                                        min, max, default values are 0, 255, 0
+
+      --PU32IntraPlanarDeltaRate        Specifies the delta rate for RD cost of Intra Planar mode of
+                                         PU32
+                                        min, max, default values are 0, 255, 0
+
+      --PU32IntraDcDeltaRate            Specifies the delta rate for RD cost of Intra DC mode of PU3
+                                        2
+                                        min, max, default values are 0, 255, 0
+
+      --PU32IntraAngleDeltaRate         Specifies the delta rate for RD cost of Intra angle modes of
+                                         PU32
+                                        min, max, default values are 0, 255, 0
+
+      --CU08IntraDeltaRate              Specifies the delta rate for RD cost of Intra mode of CU08
+                                        min, max, default values are 0, 255, 0
+
+      --CU08InterDeltaRate              Specifies the delta rate for RD cost of Inter mode of CU08
+                                        min, max, default values are 0, 255, 0
+
+      --CU08MergeDeltaRate              Specifies the delta rate for RD cost of merge mode of CU08
+                                        min, max, default values are 0, 255, 0
+
+      --CU16IntraDeltaRate              Specifies the delta rate for RD cost of Intra mode of CU16
+                                        min, max, default values are 0, 255, 0
+
+      --CU16InterDeltaRate              Specifies the delta rate for RD cost of Inter mode of CU16
+                                        min, max, default values are 0, 255, 0
+
+      --CU16MergeDeltaRate              Specifies the delta rate for RD cost of merge mode of CU16
+                                        min, max, default values are 0, 255, 0
+
+      --CU32IntraDeltaRate              Specifies the delta rate for RD cost of Intra mode of CU32
+                                        min, max, default values are 0, 255, 0
+
+      --CU32InterDeltaRate              Specifies the delta rate for RD cost of Inter mode of CU32
+                                        min, max, default values are 0, 255, 0
+
+      --CU32MergeDeltaRate              Specifies the delta rate for RD cost of merge mode of CU32
+                                        min, max, default values are 0, 255, 0
+
+      --EnModeMap                       Enables the mode map to set CTU mode or coefficient drop fla
+                                        g for each  64x64 blocks by user.
+                                         0 : Disable the mode map
+                                         1 : Enables only the CTU mode map
+                                         2 : Enables only the coefficient drop flag map
+                                         3 : Enables both the CTU mode map and the coefficient drop 
+                                        flag map
+                                        min, max, default values are 0, 3, 0
+
+      --ModeMapFile                     Specifies the Mode Map file name to be loaded.
+
+Example:
+	hevc_enc.exe -c test.cfg -c yuv.cfg --QP=32
