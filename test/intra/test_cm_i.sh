@@ -145,6 +145,6 @@ do
 
   # counter
   seq_pnt=$((seq_pnt + 5))
-
-  python3 extract_data_i.py
 done
+
+python3 extract_data_i.py

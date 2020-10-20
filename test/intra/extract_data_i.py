@@ -34,7 +34,7 @@ for file in files:
                     file_object.write(str(v_psnr ) +",")
                     file_object.write(str(file)+"\n")
 
-#sort
+# rearrange
 with open("result.csv","w") as file_object:
     file_object.write("bitrate(kb/s) , psnr(Y) , psnr(U) , psnr(V) , Sequence\n")
 
@@ -67,4 +67,4 @@ for file_name in file_list:
                 with open("result.csv","a") as file_write:
                     file_write.write(line)
 
-# os.remove("result_temp.csv")  
+os.remove("result_temp.csv")  

@@ -5,7 +5,6 @@ directory = "./result"
 os.chdir(directory)
 cwd = os.getcwd()  
 
-# cur
 with open("result_temp.csv","w") as file_object:
     file_object.write("bitrate(kb/s) , psnr(Y) , psnr(U) , psnr(V) , Sequence\n")
 
@@ -35,7 +34,7 @@ for file in files:
                     file_object.write(str(v_psnr ) +",")
                     file_object.write(str(file)+"\n")
 
-# all
+# rearrange
 with open("result.csv","w") as file_object:
     file_object.write("bitrate(kb/s) , psnr(Y) , psnr(U) , psnr(V) , Sequence\n")
 

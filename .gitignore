@@ -3,4 +3,4 @@
 *.rar
 
 # generate
-result/
+result*/
