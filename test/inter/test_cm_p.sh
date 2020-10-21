@@ -88,7 +88,8 @@ do
       -h                                    ${SEQ_HEI}               \
       -f                                    ${FRAME_LEN}             \
       -q                                    ${QP_VAL}                \
-    >& "${BIN_FILE}.log" &
+      --DisableCoefClear=1    \
+          >& "${BIN_FILE}.log" &
 
     # counter
     qp_pnt=$((qp_pnt + 1))
